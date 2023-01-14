@@ -28,6 +28,7 @@ function getUserinfo() {
             if (res.status !== 0) {
                 return layui.layer.msg('获取用户信息失败')
             }
+            // console.log(res.data);
             renderAvatar(res.data)
         },
         // 不论请求成功与否都会执行的compiete回调函数
@@ -58,4 +59,20 @@ function renderAvatar(user) {
         $('.text-avatar').html(first).show()
         $('.layui-nav-img').hide()
     }
+}
+
+// 封装一个函数密码修改后跳转到登陆界面
+function goLogin() {
+    layer.alert('更新密码成功！请重新登陆', function (index) {
+        //do something
+        localStorage.removeItem('token')
+        // location.href = './login.html'
+        location.reload(true)
+        layer.close(index);
+        // //防止页面后退
+        // history.pushState(null, null, './login.html');
+        // window.addEventListener('popstate', function () {
+        //     history.pushState(null, null, './login.html');
+        // })
+    })
 }
